@@ -7,13 +7,13 @@ public class Producer {
 
     public static void main(String[] args) {
         final String queueName = "incoming-items";
-        // Get the service account name and access key from environment variables.
-        String serviceAccountName = System.getenv("SERVICE_ACCOUNT_NAME");
-        String serviceAccountKey = System.getenv("SERVICE_ACCOUNT_KEY");
+        // Get the storage account name and access key from environment variables.
+        String storageAccountName = System.getenv("STORAGE_ACCOUNT_NAME");
+        String storageAccountKey = System.getenv("STORAGE_ACCOUNT_KEY");
         // Create the connection string for the storage account.
         final String storageConnectionString = "DefaultEndpointsProtocol=http;" +
-            "AccountName=" + serviceAccountName + ";" +
-            "AccountKey=" + serviceAccountKey;
+            "AccountName=" + storageAccountName + ";" +
+            "AccountKey=" + storageAccountKey;
         try {
             //Retrieve the storage account.
             CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
