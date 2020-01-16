@@ -6,11 +6,14 @@ import com.microsoft.azure.storage.queue.*;
 public class Producer {
 
     public static void main(String[] args) {
-        final String queueName = "myqueue";
+        final String queueName = "incoming-items";
+        // Get the service account name and access key from environment variables.
+        String serviceAccountName = System.getenv("SERVICE_ACCOUNT_NAME");
+        String serviceAccountKey = System.getenv("SERVICE_ACCOUNT_KEY");
         // Create the connection string for the storage account.
         final String storageConnectionString = "DefaultEndpointsProtocol=http;" +
-            "AccountName=webconfigtvb7zm6l4lloo;" +
-            "AccountKey=***REMOVED***";
+            "AccountName=" + serviceAccountName + ";" +
+            "AccountKey=" + serviceAccountKey;
         try {
             //Retrieve the storage account.
             CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
@@ -22,9 +25,11 @@ public class Producer {
             CloudQueue queue = queueClient.getQueueReference(queueName);
             queue.createIfNotExists();
 
-            // Add a new message to the queue.
-            CloudQueueMessage message = new CloudQueueMessage("Hello, World!");
-            queue.addMessage(message);
+            // Add some new messages to the queue.
+            queue.addMessage(new CloudQueueMessage("Item 4457: Bowling Trophy"));
+            queue.addMessage(new CloudQueueMessage("Item 4458: Potato Collection"));
+            queue.addMessage(new CloudQueueMessage("Item 4459: 11 Herbs and Spices Recipe"));
+            queue.addMessage(new CloudQueueMessage("Item 4460: Ravenclaw's Diadem"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

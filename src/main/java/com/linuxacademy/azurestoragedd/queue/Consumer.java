@@ -6,11 +6,14 @@ import com.microsoft.azure.storage.queue.*;
 public class Consumer {
 
     public static void main(String[] args) {
-        final String queueName = "myqueue";
+        final String queueName = "incoming-items";
+        // Get the service account name and access key from environment variables.
+        String serviceAccountName = System.getenv("SERVICE_ACCOUNT_NAME");
+        String serviceAccountKey = System.getenv("SERVICE_ACCOUNT_KEY");
         // Create the connection string for the storage account.
         final String storageConnectionString = "DefaultEndpointsProtocol=http;" +
-            "AccountName=webconfigtvb7zm6l4lloo;" +
-            "AccountKey=***REMOVED***";
+            "AccountName=" + serviceAccountName + ";" +
+            "AccountKey=" + serviceAccountKey;
         try {
             //Retrieve the storage account.
             CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
