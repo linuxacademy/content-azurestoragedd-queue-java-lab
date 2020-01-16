@@ -1,0 +1,25 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+}
+
+application {
+    mainClassName = 'com.linuxacademy.azurestoragedd.queue.Producer'
+}
+
+task(runProducer, dependsOn: 'classes', type: JavaExec) {
+   main = 'com.linuxacademy.azurestoragedd.queue.Producer'
+   classpath = sourceSets.main.runtimeClasspath
+}
+
+task(runConsumer, dependsOn: 'classes', type: JavaExec) {
+   main = 'com.linuxacademy.azurestoragedd.queue.Consumer'
+   classpath = sourceSets.main.runtimeClasspath
+}
